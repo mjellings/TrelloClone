@@ -14,7 +14,8 @@ class BoardController extends Controller
      */
     public function index()
     {
-        //
+        // Get list of boards for existing user...
+        
     }
 
     /**

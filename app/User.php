@@ -27,4 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    /**
+     * Get all of the boards for the user.
+     */
+    public function boards()
+    {
+        return $this->hasMany(Board::class);
+    }
+
+    
 }
