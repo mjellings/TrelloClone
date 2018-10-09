@@ -12,10 +12,14 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // Get list of boards for existing user...
-        
+        $boards = $request->user()->boards()->get();
+
+        return view('boards.index', [
+            'boards' => $boards,
+        ]);
     }
 
     /**

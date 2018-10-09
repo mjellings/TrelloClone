@@ -43,37 +43,61 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="/" class="simple-text">
-                    {{ config('app.name', 'Laravel') }}
+                <a href="http://www.creative-tim.com" class="simple-text">
+                    Creative Tim
                 </a>
             </div>
-            @if (Auth::check())
+
             <ul class="nav">
-                <li class="active">
-                    <a href="/">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Welcome</p>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="/boards">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Boards</p>
-                    </a>
-                </li>
-                <!--
                 <li>
                     <a href="dashboard.html">
                         <i class="ti-panel"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                -->
+                <li>
+                    <a href="user.html">
+                        <i class="ti-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="table.html">
+                        <i class="ti-view-list-alt"></i>
+                        <p>Table List</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="typography.html">
+                        <i class="ti-text"></i>
+                        <p>Typography</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="icons.html">
+                        <i class="ti-pencil-alt2"></i>
+                        <p>Icons</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="maps.html">
+                        <i class="ti-map"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="notifications.html">
+                        <i class="ti-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+				<li class="active-pro">
+                    <a href="upgrade.html">
+                        <i class="ti-export"></i>
+                        <p>Upgrade to PRO</p>
+                    </a>
+                </li>
             </ul>
-            @else
-
-            @endif
-            
     	</div>
     </div>
 
@@ -87,34 +111,36 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <!--<a class="navbar-brand" href="#">{{ config('app.name', 'Laravel') }}</a>-->
+                    <a class="navbar-brand" href="#">Table List</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <!--
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="ti-panel"></i>
+								<p>Stats</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-bell"></i>
+                                    <p class="notification">5</p>
+									<p>Notifications</p>
+									<b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
 						<li>
                             <a href="#">
 								<i class="ti-settings"></i>
 								<p>Settings</p>
                             </a>
-                        </li>
-                        -->
-                        <li>
-                            @if (Auth::guest())
-                                <a href="{{ route('login') }}">Login</a>
-                            @else
-
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                                </form>
-
-                            @endif
                         </li>
                     </ul>
 
@@ -127,7 +153,6 @@
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
-                    <!--
                     <ul>
 
                         <li>
@@ -145,7 +170,7 @@
                                 Licenses
                             </a>
                         </li>
-                    </ul>-->
+                    </ul>
                 </nav>
 				<div class="copyright pull-right">
                     &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>

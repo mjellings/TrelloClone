@@ -13,7 +13,8 @@
 
 Route::get('/', function () {
     if(Auth::check()){
-        return redirect('boards');
+        //return redirect('boards');
+        return view('welcome');
     }
     else {
         return view('welcome');
