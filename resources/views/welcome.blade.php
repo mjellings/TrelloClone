@@ -6,7 +6,7 @@
                 <div class="row">
 
                     <div class="col-md-12">
-                        <div class="card card-plain">
+                        <div class="card">
                             <div class="header">
                                 <h4 class="title">Welcome</h4>
                                 <!--<p class="category">category info</p>-->

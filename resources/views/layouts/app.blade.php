@@ -99,23 +99,27 @@
                             </a>
                         </li>
                         -->
+                        @if (Auth::guest())
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        @else
                         <li>
-                            @if (Auth::guest())
-                                <a href="{{ route('login') }}">Login</a>
-                            @else
-
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                                </form>
-
-                            @endif
+                            <a href="/user">
+								<i class="ti-user"></i>
+								<p>{{ Auth::user()->name }}</p>
+                            </a>
                         </li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                            </form>
+                        </li>
+                        @endif
                     </ul>
 
                 </div>
@@ -148,7 +152,8 @@
                     </ul>-->
                 </nav>
 				<div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+                    <!-- &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>-->
+                    &copy; Nobody
                 </div>
             </div>
         </footer>
