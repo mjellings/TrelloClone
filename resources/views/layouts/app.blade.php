@@ -49,13 +49,13 @@
             </div>
             @if (Auth::check())
             <ul class="nav">
-                <li class="active">
+                <li class="{{ Request::segment(1) === null ? 'active' : null }}">
                     <a href="/">
-                        <i class="ti-view-list-alt"></i>
+                        <i class="ti-home"></i>
                         <p>Welcome</p>
                     </a>
                 </li>
-                <li class="">
+                <li class="{{ Request::segment(1) === 'boards' ? 'active' : null }}">
                     <a href="/boards">
                         <i class="ti-view-list-alt"></i>
                         <p>Boards</p>
