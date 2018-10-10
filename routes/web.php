@@ -12,18 +12,18 @@
 */
 
 Route::get('/', function () {
+    $boards = array();
     if(Auth::check()){
-        $menu_boards = Auth::User()->boards()->get();
-        return redirect('boards');
-        //return view('welcome');
+        $boards = Auth::User()->boards()->get();
     }
-    else {
-        return view('welcome');
-    }
+    return view('welcome', [
+        'boards' => $boards,
+    ]);
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/boards', 'BoardController@index')->middleware('auth');
+Route::get('/boards/{id}', 'BoardController@show')->middleware('auth');

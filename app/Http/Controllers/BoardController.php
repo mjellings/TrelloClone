@@ -46,12 +46,20 @@ class BoardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Board  $board
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Board $board)
+    public function show($id, Request $request)
     {
-        //
+        // Get list of boards for existing user...
+        $boards = $request->user()->boards()->get();
+
+        // Get requested board
+        $board = Board::find($id);
+        return view('boards.show', [
+            'board' => $board,
+            'boards' => $boards,
+        ]);
     }
 
     /**

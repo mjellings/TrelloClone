@@ -28,7 +28,7 @@
     <!--  Fonts and icons     -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/themify-icons.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/themify-icons.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -55,7 +55,7 @@
                         <p>Welcome</p>
                     </a>
                 </li>
-                <li class="{{ Request::segment(1) === 'boards' ? 'active' : null }}">
+                <li class="{{ Request::segment(1) === 'boards' && Request::segment(2) === null ? 'active' : null }}">
                     <a href="/boards">
                         <i class="ti-settings"></i>
                         <p>Manage Boards</p>
@@ -63,7 +63,7 @@
                 </li>
                 @if (count($boards) > 0)
                     @foreach ($boards as $board)
-                    <li class="">
+                    <li class="{{ Request::segment(1) == 'boards' && Request::segment(2) == $board->id ? 'active' : null }}">
                         <a href="/boards/{{ $board->id }}">
                             <i class="ti-view-list-alt"></i>
                             <p>{{ $board->name }}</p>
