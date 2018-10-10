@@ -64,7 +64,7 @@
                 @if (count($boards) > 0)
                     @foreach ($boards as $board)
                     <li class="{{ Request::segment(1) == 'boards' && Request::segment(2) == $board->id ? 'active' : null }}">
-                        <a href="/boards/{{ $board->id }}">
+                        <a href="/boards/{{ $board->id }}" title="{{ $board->description }}">
                             <i class="ti-view-list-alt"></i>
                             <p>{{ $board->name }}</p>
                         </a>
