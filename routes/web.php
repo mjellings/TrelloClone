@@ -13,6 +13,7 @@
 
 Route::get('/', function () {
     if(Auth::check()){
+        $menu_boards = Auth::User()->boards()->get();
         return redirect('boards');
         //return view('welcome');
     }

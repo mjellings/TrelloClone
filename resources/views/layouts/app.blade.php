@@ -57,10 +57,20 @@
                 </li>
                 <li class="{{ Request::segment(1) === 'boards' ? 'active' : null }}">
                     <a href="/boards">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Boards</p>
+                        <i class="ti-settings"></i>
+                        <p>Manage Boards</p>
                     </a>
                 </li>
+                @if (count($boards) > 0)
+                    @foreach ($boards as $board)
+                    <li class="">
+                        <a href="/boards/{{ $board->id }}">
+                            <i class="ti-view-list-alt"></i>
+                            <p>{{ $board->name }}</p>
+                        </a>
+                    </li>
+                    @endforeach
+                @endif
                 <!--
                 <li>
                     <a href="dashboard.html">

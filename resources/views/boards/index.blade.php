@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', compact($boards))
 
 @section('content')
 <div class="content">
