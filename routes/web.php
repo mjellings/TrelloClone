@@ -14,7 +14,7 @@
 Route::get('/', function () {
     $boards = array();
     if(Auth::check()){
-        $boards = Auth::User()->boards()->get();
+        $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
     }
     return view('welcome', [
         'boards' => $boards,

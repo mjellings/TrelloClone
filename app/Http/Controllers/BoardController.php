@@ -16,7 +16,7 @@ class BoardController extends Controller
     public function index(Request $request)
     {
         // Get list of boards for existing user...
-        $boards = $request->user()->boards()->get();
+        $boards = $request->user()->boards()->orderBy('name', 'asc')->get();
 
         return view('boards.index', [
             'boards' => $boards,
@@ -72,7 +72,7 @@ class BoardController extends Controller
     public function show($id, Request $request)
     {
         // Get list of boards for existing user...
-        $boards = $request->user()->boards()->get();
+        $boards = $request->user()->boards()->orderBy('name', 'asc')->get();
 
         // Get requested board
         $board = Board::find($id);
