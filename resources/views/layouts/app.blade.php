@@ -47,8 +47,9 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>
-            @if (Auth::check())
             <ul class="nav">
+
+            @if (Auth::check())
                 <li class="{{ Request::segment(1) === null ? 'active' : null }}">
                     <a href="/">
                         <i class="ti-home"></i>
@@ -79,11 +80,28 @@
                     </a>
                 </li>
                 -->
-            </ul>
-            @else
+                <li class="">
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        <i class="ti-user"></i>
+                        <p>Logout</p>
+                    </a>
 
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                    </form>
+                </li>
+            @else
+                <li class="">
+                    <a href="/login">
+                        <i class="ti-user"></i>
+                        <p>Login</p>
+                    </a>
+                </li>
             @endif
-            
+                
+            </ul>
     	</div>
     </div>
 
@@ -109,8 +127,9 @@
                             </a>
                         </li>
                         -->
+                        
                         @if (Auth::guest())
-                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <!--<li><a href="{{ route('login') }}">Login</a></li>-->
                         @else
                         <li>
                             <a href="/user">
@@ -118,7 +137,7 @@
 								<p>{{ Auth::user()->name }}</p>
                             </a>
                         </li>
-                        <li>
+                        <!--<li>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -128,8 +147,9 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                             </form>
-                        </li>
+                        </li>-->
                         @endif
+
                     </ul>
 
                 </div>
