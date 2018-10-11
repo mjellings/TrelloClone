@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BoardController extends Controller
 {
@@ -41,7 +42,25 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect('/boards')
+                ->withInput()
+                ->withErrors($validator);
+        }
+    
+        $board = new Board;
+        $board->name = $request->name;
+        $board->description = $request->description;
+        $board->status = '';
+        $board->user_id = $request->user()->id;
+        $board->save();
+    
+        return redirect('/boards');
     }
 
     /**
