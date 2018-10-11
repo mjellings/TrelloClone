@@ -2235,6 +2235,11 @@ textarea.form-control {
     padding: 5px 0;
 }
 
+.card .footer p {
+    text-align: right;
+    padding: 5px;
+}
+
 .card .footer hr {
     margin-top: 5px;
     margin-bottom: 5px;

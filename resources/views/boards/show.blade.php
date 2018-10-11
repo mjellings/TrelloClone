@@ -7,11 +7,7 @@
                 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">{{ $board->name }}</h4>
-                                <!--<p class="category">category info</p>-->
-                            </div>
+                        <div class="card card-plain">
                             <div class="content">
                                 <p>{{ $board->description }}</p>
                             </div>

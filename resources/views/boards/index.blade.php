@@ -3,6 +3,7 @@
 @section('content')
 <div class="content">
             <div class="container-fluid">
+                
                 @if (count($boards) > 0)
                 
                 <div class="row">
@@ -16,10 +17,29 @@
                             <div class="content">
                                 <p>{{ $board->description }}</p>
                             </div>
+                            <div class="footer">
+                                <p>
+                                    <a class="btn btn-info btn-fill btn-wd">
+                                        View
+                                    </a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     @endforeach
 
+                </div>
+
+                @else 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="content">
+                                <p>Nothing to see here, why not create a new board.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 @endif
             </div>

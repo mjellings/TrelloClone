@@ -19,6 +19,7 @@ class BoardController extends Controller
 
         return view('boards.index', [
             'boards' => $boards,
+            'page_title' => 'Current Boards',
         ]);
     }
 
@@ -59,6 +60,7 @@ class BoardController extends Controller
         return view('boards.show', [
             'board' => $board,
             'boards' => $boards,
+            'page_title' => $board->name,
         ]);
     }
 
