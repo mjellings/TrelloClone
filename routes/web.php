@@ -18,6 +18,7 @@ Route::get('/', function () {
     }
     return view('welcome', [
         'boards' => $boards,
+        'page_title' => 'welcome',
     ]);
 });
 
