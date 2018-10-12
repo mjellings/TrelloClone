@@ -15,6 +15,7 @@ class Board extends Model
         'name', 'description',
     ];
 
+
     /**
      * Get the user that owns the task.
      */

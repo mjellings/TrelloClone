@@ -10,20 +10,20 @@
                             <div class="header">
                                 <div class="content">
 
-@if (count($errors) > 0)
-    <!-- Form Error List -->
-    <div class="alert alert-danger">
-        <strong>Whoops! Something went wrong!</strong>
+                                    @if (count($errors) > 0)
+                                        <!-- Form Error List -->
+                                        <div class="alert alert-danger">
+                                            <strong>Whoops! Something went wrong!</strong>
 
-        <br><br>
+                                            <br><br>
 
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
 
                                     <form action="/boards/create" method="post">
                                     {{ csrf_field() }}
@@ -66,7 +66,7 @@
                             </div>
                             <div class="footer">
                                 <p>
-                                    <a class="btn btn-info btn-fill btn-wd">
+                                    <a class="btn btn-info btn-fill btn-wd" href="/boards/{{ $board->id }}">
                                         View
                                     </a>
                                 </p>
