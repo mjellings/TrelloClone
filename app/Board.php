@@ -23,4 +23,12 @@ class Board extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get all of the cards for the board.
+     */
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
 }
