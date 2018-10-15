@@ -26,12 +26,14 @@
                             <div class="content">
                                 {{ $card->content }}
                             </div>
-                            <!-- Placeholder for card tags
+                            <?php $tags = $card->tags()->orderBy('label', 'asc')->get(); ?>
+                            @if (count($tags))
                             <div class="footer text-right">
-                                <span class="card_tag card_important">Imporant</span> 
-                                <span class="card_tag card_completed">Completed</span>
+                                @foreach ($tags as $tag)
+                                <span class="card_tag card_{{ $tag->class }}">{{ $tag->label }}</span> 
+                                @endforeach
                             </div>
-                            -->
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -2269,13 +2269,17 @@ textarea.form-control {
 }
 
 .card_important {
-    background-color: #FF0000;
-    color: #FFFFFF;
+    background-color: red;
+    color: white;
 }
 
 .card_completed {
-    background-color: #00FF00;
-    color: #FFFFFF;
+    background-color: green;
+    color: white;
+}
+
+.card_in_progress {
+    background-color: yellow;
 }
 
 .card .author {
