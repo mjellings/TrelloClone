@@ -4,5 +4,5 @@
 if ( $_POST['payload'] ) {
   shell_exec( 'cd c:\xampp\htdocs\trello.jello.me.uk && git reset --hard HEAD && git pull' );
 }
-?>Test
+?>Test 2
 
