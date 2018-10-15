@@ -2229,6 +2229,7 @@ textarea.form-control {
 .card .footer {
     padding: 0;
     line-height: 30px;
+    padding-right: 5px;
 }
 
 .card .footer .legend {
@@ -2258,6 +2259,23 @@ textarea.form-control {
 
 .card .footer div {
     display: inline-block;
+}
+
+.card_tag {
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+}
+
+.card_important {
+    background-color: #FF0000;
+    color: #FFFFFF;
+}
+
+.card_completed {
+    background-color: #00FF00;
+    color: #FFFFFF;
 }
 
 .card .author {

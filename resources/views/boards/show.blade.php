@@ -26,6 +26,12 @@
                             <div class="content">
                                 {{ $card->content }}
                             </div>
+                            <!-- Placeholder for card tags
+                            <div class="footer text-right">
+                                <span class="card_tag card_important">Imporant</span> 
+                                <span class="card_tag card_completed">Completed</span>
+                            </div>
+                            -->
                         </div>
                     </div>
                 </div>
