@@ -1,5 +1,8 @@
 <?php
 
-echo '<pre>'; print_r($_POST); echo '</pre>';
-file_put_contents('log.txt', print_r($_POST, true));
+// Use in the "Post-Receive URLs" section of your GitHub repo.
+if ( $_POST['payload'] ) {
+  shell_exec( 'cd c:\xampp\htdocs\trello.jello.me.uk && git reset --hard HEAD && git pull' );
+}
+?>hi
 
