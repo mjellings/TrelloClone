@@ -14,8 +14,10 @@ class CreateCardTagTable extends Migration
     public function up()
     {
         Schema::create('card_tag', function (Blueprint $table) {
-            $table->integer('card_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
+            $table->integer('card_id')->unsigned()->index();
+            $table->foreign('card_id')->references('id')->on('cards');
+            $table->integer('tag_id')->unsigned()->index();
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 
