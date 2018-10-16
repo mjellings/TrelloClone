@@ -6,5 +6,5 @@
   shell_exec( 'cd c:\xampp\htdocs\trello.jello.me.uk && composer update && composer install' );
   shell_exec( 'cd c:\xampp\htdocs\trello.jello.me.uk && php artisan migrate' );
 //}
-?>Test 6
+?>Test 7
 
