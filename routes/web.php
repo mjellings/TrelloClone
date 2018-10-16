@@ -29,3 +29,4 @@ Auth::routes();
 Route::get('/boards', 'BoardController@index')->middleware('auth');
 Route::get('/boards/{id}', 'BoardController@show')->middleware('auth');
 Route::post('/boards/create', 'BoardController@store')->middleware('auth');
+Route::post('/cards/create', 'CardController@store')->middleware('auth');

@@ -12,7 +12,7 @@ class Card extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'board_id', 'name', 'content',
+        'user_id', 'board_id', 'title', 'content',
     ];
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Card;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CardController extends Controller
 {
@@ -35,7 +36,28 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'board_id' => 'required',
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect('/boards/' . $request->board_id)
+                ->withInput()
+                ->withErrors($validator);
+        }
+    
+        /*
+        $board = new Board;
+        $board->name = $request->name;
+        $board->description = $request->description;
+        $board->status = '';
+        $board->user_id = $request->user()->id;
+        $board->save();
+        */
+    
+        return redirect('/boards/' . $request->board_id);
     }
 
     /**
