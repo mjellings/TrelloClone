@@ -78,8 +78,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Content</label>
-                                            <input type="text" class="form-control border-input" placeholder="Content" value="" name="content">
-                                            {!! Form::textarea('keterangan', null, ['class'=>'form-control']) !!}
+                                            {!! Form::textarea('content', null, ['class'=>'form-control border-input']) !!}
                                         </div>
                                     </div>
                                 </div>
