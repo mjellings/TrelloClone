@@ -56,6 +56,14 @@ class CardController extends Controller
         $board->user_id = $request->user()->id;
         $board->save();
         */
+
+        $card = new Card;
+        $card->board_id = $request->board_id;
+        $card->user_id = $request->user()->id;
+        $card->title = $request->title;
+        $card->content = $request->content;
+        $card->save();
+
     
         return redirect('/boards/' . $request->board_id);
     }
