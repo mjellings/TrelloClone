@@ -64,7 +64,6 @@ class CardController extends Controller
         $card->content = $request->content;
         $card->save();
 
-    
         return redirect('/boards/' . $request->board_id);
     }
 
