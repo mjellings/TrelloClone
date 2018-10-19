@@ -24,13 +24,15 @@
                                 <h4 class="title">{{ $card->title }}</h4>
                             </div>
                             <div class="content">
-                                {{ $card->content }}
+                                <?php $Parsedown = new Parsedown(); 
+                                $Parsedown->setSafeMode(true); ?>
+                                {!! parsedown($card->content) !!}
                             </div>
                             <?php $tags = $card->tags()->orderBy('label', 'asc')->get(); ?>
                             @if (count($tags))
                             <div class="footer text-right">
                                 @foreach ($tags as $tag)
-                                <span class="card_tag card_{{ $tag->class }}">{{ $tag->label }}</span> 
+                                <span class="card_tag card_{{ $tag->class }}">{{ $tag->label }} <sup><a href="/removeCardTag/{{ $card->id }}/{{ $tag->id }}">x</a></sup></span> 
                                 @endforeach
                             </div>
                             @endif
@@ -79,6 +81,7 @@
                                         <div class="form-group">
                                             <label>Content</label>
                                             {!! Form::textarea('content', null, ['class'=>'form-control border-input']) !!}
+                                            <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">* Markdown supported</a>
                                         </div>
                                     </div>
                                 </div>
