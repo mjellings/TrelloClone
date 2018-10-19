@@ -76,11 +76,16 @@ class BoardController extends Controller
 
         // Get requested board
         $board = Board::find($id);
-        return view('boards.show', [
-            'board' => $board,
-            'boards' => $boards,
-            'page_title' => $board->name,
-        ]);
+
+        if ($board->user_id !== $request->user()->id) {
+            return redirect('/boards')->withErrors(['You do not have permission to view that board!']);
+        } else {
+            return view('boards.show', [
+                'board' => $board,
+                'boards' => $boards,
+                'page_title' => $board->name,
+            ]);
+        }
     }
 
     /**
