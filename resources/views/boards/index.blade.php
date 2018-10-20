@@ -55,7 +55,7 @@
                 
                 <div class="row">
                     @foreach ($boards as $board)
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">{{ $board->name }}</h4>
