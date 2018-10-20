@@ -11,6 +11,8 @@
 |
 */
 
+use App\Card;
+
 Route::get('/', function () {
     $boards = array();
     if(Auth::check()){
@@ -20,6 +22,19 @@ Route::get('/', function () {
         'boards' => $boards,
         'page_title' => 'welcome',
     ]);
+});
+
+Route::get('/cards/{id}/edit', function($id) {
+    // Boards for the nav menu
+    $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
+
+    $card = Card::find($id);
+    return view('cards.edit', [
+        'boards' => $boards,
+        'page_title' => 'Edit Card - ' . $card->title,
+        'card' => $card,
+    ]);
+
 });
 
 Auth::routes();
