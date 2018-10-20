@@ -16,9 +16,10 @@
                 </div>
                 <?php $cards = $board->cards()->orderBy('title', 'asc')->get(); ?>
                 @if (count($cards) > 0)
-                @foreach ($cards as $card)
                 <div class="row">
-                    <div class="col-md-12">
+                @foreach ($cards as $card)
+                
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">{{ $card->title }}</h4>
@@ -38,8 +39,9 @@
                             @endif
                         </div>
                     </div>
-                </div>
+
                 @endforeach
+                </div>
                 @endif
 
                 <div class="row">
