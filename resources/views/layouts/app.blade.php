@@ -218,5 +218,5 @@
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="{{ asset('assets/js/demo.js') }}"></script>
 
-
+    @yield('javascript')
 </html>
