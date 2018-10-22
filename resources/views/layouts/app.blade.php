@@ -201,7 +201,7 @@
 	<script src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="{{ asset('assets/js/bootstrap-checkbox-radio.js') }}"></script>
+	<!--<script src="{{ asset('assets/js/bootstrap-checkbox-radio.js') }}"></script>-->
 
 	<!--  Charts Plugin -->
 	<script src="{{ asset('assets/js/chartist.min.js') }}"></script>
