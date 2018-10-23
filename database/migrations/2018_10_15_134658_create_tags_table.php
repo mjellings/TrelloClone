@@ -19,6 +19,31 @@ class CreateTagsTable extends Migration
             $table->string('class');
             $table->timestamps();
         });
+
+        DB::table('tags')->insert(
+            [
+                'label' => 'Important',
+                'class' => 'important',
+                'created_at' => Now(),
+                'updated_at' => Now()
+            ]
+        );
+        DB::table('tags')->insert( 
+            [
+                'label' => 'Completed',
+                'class' => 'completed',
+                'created_at' => Now(),
+                'updated_at' => Now()
+            ]
+        );
+        DB::table('tags')->insert(
+            [
+                'label' => 'In Progress',
+                'class' => 'in_progress',
+                'created_at' => Now(),
+                'updated_at' => Now()
+            ]
+        );
     }
 
     /**
