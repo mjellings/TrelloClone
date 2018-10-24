@@ -58,7 +58,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">{{ $board->name }}</h4>
+                                <h4 class="title card_title">{{ $board->name }} <a href="/boards/{{ $board->id }}/edit" id="{{ $board->id }}_edit" style="display: none;"><i class="ti-pencil-alt"></i></a></h4>
                                 <!--<p class="category">category info</p>-->
                             </div>
                             <div class="content">
@@ -91,4 +91,16 @@
                 @endif
             </div>
         </div>
+@endsection
+
+@section('javascript')
+<script>
+$(document).ready(function() {
+    $(".card_title").hover(function(){
+    $(this).find('a').css("display", "inline");
+    }, function(){
+    $(this).find('a').css("display", "none");
+    });
+});
+</script>
 @endsection

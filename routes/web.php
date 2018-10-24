@@ -95,6 +95,12 @@ Route::post('/cards/{id}/updateTags', function (Request $request) {
     return redirect('/boards/' . $card->board_id);
 });
 
+Route::get('/boards/{id}/edit', function ($id) {
+    $board = Board::find($id);
+
+    echo '<pre>'; var_dump($board); echo '</pre>';
+});
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
