@@ -55,17 +55,34 @@
 
                 <div class="row">
                     <div class="col-md-12">
+                        
                         <div class="card">
+                        <form action="/cards/{{ $card->id }}/updateTags" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="card_id" value="{{ $card->id }}" />
                             <div class="header">
                                 <h4 class="title">Tags</h4>
                             </div>
-                            <div class="content">
-                                @foreach ($tags as $tag)
-                                {{ Form::checkbox('selected_tags[]', $tag->id, in_array($tag->id, $current_tags)) }}
-                                {{ Form::label('selected_tag', $tag->label, array('class' => "card_tag card_" . $tag->class)) }}<br>
-                                @endforeach
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="content">
+                                        @foreach ($tags as $tag)
+                                        {{ Form::checkbox('selected_tags[]', $tag->id, in_array($tag->id, $current_tags)) }}
+                                        {{ Form::label('selected_tag', $tag->label, array('class' => "card_tag card_" . $tag->class)) }}<br>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Update Tags</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         </div>
+                        
                     </div>
                 </div>
 

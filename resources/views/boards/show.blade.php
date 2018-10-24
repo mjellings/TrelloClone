@@ -33,7 +33,7 @@
                             @if (count($tags))
                             <div class="footer text-right">
                                 @foreach ($tags as $tag)
-                                <span class="card_tag card_{{ $tag->class }}">{{ $tag->label }} <sup><a href="/removeCardTag/{{ $card->id }}/{{ $tag->id }}">x</a></sup></span> 
+                                <span class="card_tag card_{{ $tag->class }}">{{ $tag->label }}</span> 
                                 @endforeach
                             </div>
                             @endif

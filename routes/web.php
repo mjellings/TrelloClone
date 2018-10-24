@@ -80,6 +80,21 @@ Route::post('/cards/{id}/edit', function (Request $request) {
     return redirect('/boards/' . $card->board_id);
 });
 
+Route::post('/cards/{id}/updateTags', function (Request $request) {
+    $card = Card::find($request->card_id);
+
+    if (isset($request->selected_tags) && is_array($request->selected_tags) && count($request->selected_tags)) {
+        // Some tags selected so update card.
+        $card->tags()->sync($request->selected_tags);
+    }
+    else {
+        // No tags selected, so remove them from card.
+        $card->tags()->sync([]);
+    }
+
+    return redirect('/boards/' . $card->board_id);
+});
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
