@@ -38,7 +38,7 @@ Route::get('/cards/{id}/edit', function($id) {
     $current_tags = array();
 
     // Find existing card
-    $card = Card::find($id);
+    $card = Card::findOrFail($id);
 
     foreach ($card->tags as $tag) {
         $current_tags[] = $tag->id;
@@ -72,7 +72,7 @@ Route::post('/cards/{id}/edit', function (Request $request) {
     }
 
     // Find existing card
-    $card = Card::find($request->card_id);
+    $card = Card::findOrFail($request->card_id);
     $card->title = $request->title;
     $card->content = $request->content;
     $card->save();
@@ -81,7 +81,7 @@ Route::post('/cards/{id}/edit', function (Request $request) {
 });
 
 Route::post('/cards/{id}/updateTags', function (Request $request) {
-    $card = Card::find($request->card_id);
+    $card = Card::findOrFail($request->card_id);
 
     if (isset($request->selected_tags) && is_array($request->selected_tags) && count($request->selected_tags)) {
         // Some tags selected so update card.
@@ -96,9 +96,45 @@ Route::post('/cards/{id}/updateTags', function (Request $request) {
 });
 
 Route::get('/boards/{id}/edit', function ($id) {
-    $board = Board::find($id);
+    // Boards for the nav menu
+    $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
 
-    echo '<pre>'; var_dump($board); echo '</pre>';
+    // Find this specific board
+    $board = Board::findOrFail($id);
+
+    return view('boards.edit', [
+        'board' => $board,
+        'boards' => $boards,
+        'page_title' => 'Edit Board - ' . $board->title
+    ]);
+});
+
+Route::post('/boards/{id}/edit', function(Request $request, $id) {
+    // Boards for the nav menu
+    $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
+
+    // Find this specific board
+    $board = Board::findOrFail($id);
+
+    // Validation rules
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:255',
+        'description' => 'required',
+    ]);
+
+    // Redirect if validation fails
+    if ($validator->fails()) {
+        return redirect('/boards/' . $request->board_id . '/edit')
+            ->withInput()
+            ->withErrors($validator);
+    }
+
+    $board->name = $request->name;
+    $board->description = $request->description;
+    $board->save();
+
+    return redirect('/boards/');
+
 });
 
 Auth::routes();
