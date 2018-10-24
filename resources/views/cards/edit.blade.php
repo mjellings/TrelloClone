@@ -38,7 +38,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Content</label>
-                                                <textarea rows="5" class="form-control border-input" name="content">{{ $card->content }}</textarea>
+                                                <textarea rows="10" class="form-control border-input" name="content">{{ $card->content }}</textarea>
                                                 <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">* Markdown supported</a>
                                             </div>
                                         </div>
