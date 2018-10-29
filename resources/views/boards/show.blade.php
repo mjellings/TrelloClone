@@ -34,13 +34,22 @@
                                 {!! parsedown($card->content) !!}
                             </div>
                             <?php $tags = $card->tags()->orderBy('label', 'asc')->get(); ?>
-                            @if (count($tags))
-                            <div class="footer text-right">
-                                @foreach ($tags as $tag)
-                                <span class="card_tag card_{{ $tag->class }}">{{ $tag->label }}</span> 
-                                @endforeach
+                            
+                            <div class="footer">
+                                <p class="author_info" style="text-align: left; padding-left: 15px;">
+                                    <span class="auther_name">{{ $card->user->name }}</span> 
+                                    // 
+                                    <span class="created_at">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($card->created_at))->diffForHumans() }}</span>
+                                </p>
+                                @if (count($tags))
+                                <p class="text-right">
+                                    @foreach ($tags as $tag)
+                                    <span class="card_tag card_{{ $tag->class }}">{{ $tag->label }}</span> 
+                                    @endforeach
+                                </p>
+                                @endif
                             </div>
-                            @endif
+                            
                         </div>
                     </div>
 
