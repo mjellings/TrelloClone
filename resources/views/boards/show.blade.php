@@ -135,7 +135,26 @@
                                 </form>
                                 @endif
 
-                                
+                                @if (count($board->user))
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th>Name</th>
+                                    	<th>Email</th>
+                                        <th>Board Owner</th>
+                                    	<th>Can Add Cards?</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($board->user as $u)
+                                        <tr>
+                                        	<td>{{ $u->name }}</td>
+                                        	<td>{{ $u->email }}</td>
+                                            <td>{{ ($u->pivot->is_owner) ? 'Yes' : '' }}</td>
+                                        	<td>{{ ($u->pivot->can_write) ? 'Yes' : '' }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -81,7 +81,6 @@ class BoardController extends Controller
         
         $shared_users = array();
 
-        
 
         /* if ($board->user_id !== $request->user()->id) {
             return redirect('/boards')->withErrors(['You do not have permission to view that board!']);
