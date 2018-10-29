@@ -67,6 +67,7 @@
                                     </div>
                                 @endif
 
+                                @if ($board->pivot->can_write)
                                 <form action="/cards/create" method="post">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="board_id" value="{{ $board->id }}" />
@@ -91,6 +92,50 @@
                                     <button type="submit" class="btn btn-info btn-fill btn-wd">Create Board</button>
                                 </div>
                                 </form>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Share Board</h4>
+                            </div>
+                            <div class="content table-responsive">
+                                @if ($board->pivot->is_owner)
+                                <form action="/boards/{{ $board->id }}/share" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="board_id" value="{{ $board->id }}" />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="can_write" id="can_write">
+
+                                            <label class="form-check-label" for="can_write">
+                                                User can add cards
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" class="form-control border-input" placeholder="Users email address" name="email" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-info btn-fill btn-wd">Share Board</button>
+                                </div>
+                                </form>
+                                @endif
+
+                                
                             </div>
                         </div>
                     </div>

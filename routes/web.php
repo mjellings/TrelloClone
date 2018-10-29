@@ -14,6 +14,7 @@
 use App\Card;
 use App\Board;
 use App\Tag;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -135,6 +136,40 @@ Route::post('/boards/{id}/edit', function(Request $request, $id) {
 
     return redirect('/boards/');
 
+});
+
+Route::post('/boards/{id}/share', function (Request $request, $id) {
+    // Boards for the nav menu
+    $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
+
+
+    // Validation rules
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|max:255',
+    ]);
+
+    // Redirect if validation fails
+    if ($validator->fails()) {
+        return redirect('/boards/' . $request->board_id)
+            ->withInput()
+            ->withErrors($validator);
+    }
+
+    // Find this specific board
+    $board = Board::findOrFail($id);
+
+    // Find the specific user
+    $new_user = User::where('email', $request->email)->first();
+
+    if (!$new_user) {
+        return redirect('/boards/' . $request->board_id)
+            ->withInput()
+            ->withErrors(array('message' => 'This user doesn\'t exist'));
+    }
+    $can_write = ($request->can_write) ? true : false;
+    $new_user->boards()->attach($request->board_id, ['is_owner' => false, 'can_write' => $can_write]);
+
+    return redirect('/boards/' . $request->board_id);
 });
 
 Auth::routes();

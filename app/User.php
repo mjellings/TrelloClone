@@ -33,7 +33,7 @@ class User extends Authenticatable
      */
     public function boards()
     {
-        return $this->hasMany(Board::class);
+        return $this->belongsToMany(Board::class)->withPivot('is_owner', 'can_write')->withTimestamps();
     }
 
     

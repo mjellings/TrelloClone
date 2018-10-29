@@ -57,9 +57,11 @@ class BoardController extends Controller
         $board->name = $request->name;
         $board->description = $request->description;
         $board->status = '';
-        $board->user_id = $request->user()->id;
+        // $board->user_id = $request->user()->id;
         $board->save();
-    
+
+        $request->user()->boards()->attach($board->id, ['is_owner' => true, 'can_write' => true]);
+
         return redirect('/boards');
     }
 
@@ -75,17 +77,28 @@ class BoardController extends Controller
         $boards = $request->user()->boards()->orderBy('name', 'asc')->get();
 
         // Get requested board
-        $board = Board::find($id);
+        $board = $request->user()->boards()->findOrFail($id);
+        
+        $shared_users = array();
 
-        if ($board->user_id !== $request->user()->id) {
+        
+
+        /* if ($board->user_id !== $request->user()->id) {
             return redirect('/boards')->withErrors(['You do not have permission to view that board!']);
-        } else {
+        } else { 
             return view('boards.show', [
                 'board' => $board,
                 'boards' => $boards,
                 'page_title' => $board->name,
             ]);
-        }
+        } */
+
+        return view('boards.show', [
+            'board' => $board,
+            'boards' => $boards,
+            'page_title' => $board->name,
+            'shared_users' => $shared_users
+        ]);
     }
 
     /**
