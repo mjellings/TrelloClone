@@ -11,13 +11,6 @@
 |
 */
 
-use App\Card;
-use App\Board;
-use App\Tag;
-use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
 Route::get('/', function () {
     $boards = array();
     if(Auth::check()){
