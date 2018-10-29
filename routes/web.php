@@ -169,6 +169,15 @@ Route::post('/boards/{id}/share', function (Request $request, $id) {
     $can_write = ($request->can_write) ? true : false;
     $new_user->boards()->attach($request->board_id, ['is_owner' => false, 'can_write' => $can_write]);
 
+    $mail_title = Auth::User()->name . ' has shared a new board with you';
+    $mail_content = 'A new board called ' . $board->name . ' has been shared with you.';
+
+    Mail::send('emails.share', ['title' => $mail_title, 'content' => $mail_content], function ($message) use ($new_user) {
+        $message->from('matt.jellings@gmail.com', 'Matt J');
+        $message->subject('New shared board');
+        $message->to($new_user->email);
+    });
+
     return redirect('/boards/' . $request->board_id);
 });
 
