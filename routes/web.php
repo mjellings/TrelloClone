@@ -25,15 +25,15 @@ Route::get('/', function () {
 Auth::routes();
 
 // Board routes
-Route::get('/boards', 'BoardController@index')->middleware('auth');
-Route::get('/boards/{id}', 'BoardController@show')->middleware('auth');
-Route::post('/boards/create', 'BoardController@store')->middleware('auth');
-Route::get('/boards/{board}/edit', 'BoardController@edit')->middleware('auth');
-Route::post('/boards/{board}/edit', 'BoardController@update')->middleware('auth');
-Route::post('/boards/{board}/share', 'BoardController@share')->middleware('auth');
+Route::get('/boards', 'BoardController@index');
+Route::get('/boards/{id}', 'BoardController@show');
+Route::post('/boards/create', 'BoardController@store');
+Route::get('/boards/{board}/edit', 'BoardController@edit');
+Route::post('/boards/{board}/edit', 'BoardController@update');
+Route::post('/boards/{board}/share', 'BoardController@share');
 
 // Card routes
-Route::post('/cards/create', 'CardController@store')->middleware('auth');
-Route::get('/cards/{card}/edit', 'CardController@edit')->middleware('auth');
-Route::post('/cards/{card}/edit', 'CardController@update')->middleware('auth');
-Route::post('/cards/{card}/updateTags', 'CardController@updateTags')->middleware('auth');
+Route::post('/cards/create', 'CardController@store');
+Route::get('/cards/{card}/edit', 'CardController@edit');
+Route::post('/cards/{card}/edit', 'CardController@update');
+Route::post('/cards/{card}/updateTags', 'CardController@updateTags');
