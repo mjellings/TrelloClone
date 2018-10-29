@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class CardController extends Controller
 {
@@ -86,7 +88,28 @@ class CardController extends Controller
      */
     public function edit(Card $card)
     {
-        //
+        // Boards for the nav menu
+        $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
+
+        // Retrieve full tags list
+        $tags = Tag::orderBy('label', 'asc')->get();
+
+        $current_tags = array();
+
+        // Find existing card
+        //$card = Card::findOrFail($id);
+
+        foreach ($card->tags as $tag) {
+            $current_tags[] = $tag->id;
+        }
+
+        return view('cards.edit', [
+            'boards' => $boards,
+            'page_title' => 'Edit Card - ' . $card->title,
+            'card' => $card,
+            'tags' => $tags,
+            'current_tags' => $current_tags
+        ]);
     }
 
     /**
@@ -98,7 +121,29 @@ class CardController extends Controller
      */
     public function update(Request $request, Card $card)
     {
-        //
+        // Boards for the nav menu
+        $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
+
+        // Validation rules
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+
+        // Redirect if validation fails
+        if ($validator->fails()) {
+            return redirect('/cards/' . $request->card_id . '/edit')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        // Find existing card
+        //$card = Card::findOrFail($request->card_id);
+        $card->title = $request->title;
+        $card->content = $request->content;
+        $card->save();
+
+        return redirect('/boards/' . $card->board_id);
     }
 
     /**
@@ -110,5 +155,24 @@ class CardController extends Controller
     public function destroy(Card $card)
     {
         //
+    }
+
+    /**
+     * Update tags linked to a card.
+     * 
+     */
+    public function updateTags(Request $request, Card $card)
+    {
+
+        if (isset($request->selected_tags) && is_array($request->selected_tags) && count($request->selected_tags)) {
+            // Some tags selected so update card.
+            $card->tags()->sync($request->selected_tags);
+        }
+        else {
+            // No tags selected, so remove them from card.
+            $card->tags()->sync([]);
+        }
+    
+        return redirect('/boards/' . $card->board_id);
     }
 }

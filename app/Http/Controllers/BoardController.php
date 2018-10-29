@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Board;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class BoardController extends Controller
 {
@@ -69,6 +72,7 @@ class BoardController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function show($id, Request $request)
@@ -108,7 +112,17 @@ class BoardController extends Controller
      */
     public function edit(Board $board)
     {
-        //
+        // Boards for the nav menu
+        $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
+
+        // Find this specific board
+        //$board = Board::findOrFail($id);
+
+        return view('boards.edit', [
+            'board' => $board,
+            'boards' => $boards,
+            'page_title' => 'Edit Board - ' . $board->title
+        ]);
     }
 
     /**
@@ -120,7 +134,77 @@ class BoardController extends Controller
      */
     public function update(Request $request, Board $board)
     {
-        //
+        // Boards for the nav menu
+        $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
+
+        // Find this specific board
+        // $board = Board::findOrFail($id);
+
+        // Validation rules
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'description' => 'required',
+        ]);
+
+        // Redirect if validation fails
+        if ($validator->fails()) {
+            return redirect('/boards/' . $request->board_id . '/edit')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        $board->name = $request->name;
+        $board->description = $request->description;
+        $board->save();
+
+        return redirect('/boards/');
+    }
+
+    /**
+     * Share board with another user
+     */
+    public function share(Request $request, Board $board)
+    {
+        // Boards for the nav menu
+        $boards = Auth::User()->boards()->orderBy('name', 'asc')->get();
+
+
+        // Validation rules
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|max:255',
+        ]);
+
+        // Redirect if validation fails
+        if ($validator->fails()) {
+            return redirect('/boards/' . $request->board_id)
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        // Find this specific board
+        //$board = Board::findOrFail($id);
+
+        // Find the specific user
+        $new_user = User::where('email', $request->email)->first();
+
+        if (!$new_user) {
+            return redirect('/boards/' . $request->board_id)
+                ->withInput()
+                ->withErrors(array('message' => 'This user doesn\'t exist'));
+        }
+        $can_write = ($request->can_write) ? true : false;
+        $new_user->boards()->attach($request->board_id, ['is_owner' => false, 'can_write' => $can_write]);
+
+        $mail_title = Auth::User()->name . ' has shared a new board with you';
+        $mail_content = 'A new board called ' . $board->name . ' has been shared with you.';
+
+        Mail::send('emails.share', ['title' => $mail_title, 'content' => $mail_content], function ($message) use ($new_user) {
+            $message->from('matt.jellings@gmail.com', 'Matt J');
+            $message->subject('New shared board');
+            $message->to($new_user->email);
+        });
+
+        return redirect('/boards/' . $request->board_id);
     }
 
     /**
