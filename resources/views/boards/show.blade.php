@@ -22,7 +22,11 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title card_title">{{ $card->title }} <a href="/cards/{{ $card->id }}/edit" id="{{ $card->id }}_edit" style="display: none;"><i class="ti-pencil-alt"></i></a></h4>
+                                <h4 class="title card_title">{{ $card->title }} 
+                                    @if ($board->pivot->can_write)
+                                    <a href="/cards/{{ $card->id }}/edit" id="{{ $card->id }}_edit" style="display: none;"><i class="ti-pencil-alt"></i></a>
+                                    @endif
+                                </h4>
                             </div>
                             <div class="content">
                                 <?php $Parsedown = new Parsedown(); 
