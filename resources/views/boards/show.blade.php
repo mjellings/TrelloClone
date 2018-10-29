@@ -44,6 +44,7 @@
                 </div>
                 @endif
 
+                @if ($board->pivot->can_write)
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -67,7 +68,7 @@
                                     </div>
                                 @endif
 
-                                @if ($board->pivot->can_write)
+                                
                                 <form action="/cards/create" method="post">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="board_id" value="{{ $board->id }}" />
@@ -92,11 +93,12 @@
                                     <button type="submit" class="btn btn-info btn-fill btn-wd">Create Board</button>
                                 </div>
                                 </form>
-                                @endif
+
                             </div>
                         </div>
                     </div>
                 </div>
+                @endif
                 
                 
                 <div class="row">
